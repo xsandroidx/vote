@@ -21,7 +21,7 @@ jobs:
           python-version: '3.x'
 
       - name: Cache pip
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -32,7 +32,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Cache workspace
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./
@@ -45,7 +45,7 @@ jobs:
     needs: build
     steps:
       - name: Restore workspace
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./
@@ -58,9 +58,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
       - name: Run tests
         run: nosetests
 
@@ -69,7 +66,7 @@ jobs:
     needs: unit-test
     steps:
       - name: Restore workspace
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./

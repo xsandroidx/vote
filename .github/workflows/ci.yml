@@ -56,5 +56,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest .
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          COMMIT_HASH=$(echo ${{ github.sha }} | cut -c1-7)
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/initcron:$COMMIT_HASH .
+          docker push ${{ secrets.DOCKER_USERNAME }}/initcron:$COMMIT_HASH

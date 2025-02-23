@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote
+  labels:
+    {{- include "instavote.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.vote.autoscaling.enabled }}
+  replicas: {{ .Values.vote.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "instavote.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.vote.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "instavote.labels" . | nindent 8 }}
+        {{- with .Values.vote.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.vote.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "instavote.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.vote.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.vote.securityContext | nindent 12 }}
+          image: "{{ .Values.vote.image.repository }}:{{ .Values.vote.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.vote.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.vote.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.vote.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.vote.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.vote.resources | nindent 12 }}
+          {{- with .Values.vote.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.vote.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.vote.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.vote.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.vote.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

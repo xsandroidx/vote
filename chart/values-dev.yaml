@@ -1,9 +1,9 @@
 vote:
   replicaCount: 2
   image:
-    repository: schoolofdevops/vote
+    repository: initcron/initcron
     pullPolicy: IfNotPresent
-    tag: v1
+    tag: 7af5310
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""

@@ -3,7 +3,7 @@ vote:
   image:
     repository: initcron/initcron
     pullPolicy: IfNotPresent
-    tag: 7af5310
+    tag: d5686b0
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""

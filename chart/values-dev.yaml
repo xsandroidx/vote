@@ -9,7 +9,7 @@ vote:
     repository: schoolofdevops/vote
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "v1" #@ image: schoolofdevops/vote
+    tag: "v1"
 
   imagePullSecrets: []
   nameOverride: ""

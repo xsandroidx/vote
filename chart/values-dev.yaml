@@ -3,7 +3,7 @@ vote:
   image:
     repository: initcron/initcron
     pullPolicy: IfNotPresent
-    tag: 459679e
+    tag: 1065b15
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
@@ -75,4 +75,3 @@ redis:
   nodeSelector: {}
   tolerations: []
   affinity: {}
-

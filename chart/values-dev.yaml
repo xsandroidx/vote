@@ -75,5 +75,5 @@ redis:
   nodeSelector: {}
   tolerations: []
   affinity: {}
-tag: c5714c7
+tag: 24fde15
 schoolofdevops/vote: initcron/initcron

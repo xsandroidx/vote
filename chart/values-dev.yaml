@@ -1,9 +1,9 @@
 vote:
   replicaCount: 2
   image:
-    repository: initcron/initcron
+    repository: xxsandroidxx/vote
     pullPolicy: IfNotPresent
-    tag: 1065b15
+    tag: 52eea4d
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
